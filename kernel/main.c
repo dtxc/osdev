@@ -53,7 +53,7 @@ void kernel_init(struct mboot_info *mboot_ptr) {
     // outb(PIC_MASTER_DAT, 0xF9);
     // outb(PIC_SLAVE_DAT, 0xFF);
 
-    // at f = 1193 Hz, T_irq = 0.999847 ms, the closest possible to 1s.
+    // at f = 1193 Hz, T_irq = 0.999847 ms, the closest possible to 1 ms.
     pit_install(1193);
 
     init_paging();
