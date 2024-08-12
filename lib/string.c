@@ -101,6 +101,12 @@ int itoa(char *dst, int n) {
 int int2hex(char *dst, uint32_t n) {
     uint32_t start = 0;
 
+    if (n == 0) {
+        dst[0] = '0';
+        dst[1] = '\0';
+        return 0;
+    }
+    
     if (n < 0) {
         dst[start++] = '-';
         n = -n;
