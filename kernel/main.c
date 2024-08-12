@@ -67,5 +67,5 @@ void kernel_init(struct mboot_info *mboot_ptr) {
     init_acpi();
     // ssfn_puts("ACPI initialization completed.\n");
 
-    kernel_main(vbe_info);
+    kernel_main();
 }
