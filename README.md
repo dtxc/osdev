@@ -5,6 +5,7 @@ This is a 32 bit hobby operating system written from scratch. Development starte
 
 ## Features
 + GDT/IDT ✅
++ TSS ✅
 + PIT timer ✅
 + Serial debugging ✅
 + Paging ✅
