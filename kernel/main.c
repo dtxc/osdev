@@ -18,7 +18,7 @@ static void ssfn_puts(char *s) {
     while (*s != '\0') {
         // when *s = '\n', ssfn_putc prints a weird unicode instead of a newline.
         if (*s == '\n') {
-            ssfn_dst.y += 17; // 17 looks perfect for me.
+            ssfn_dst.y += 17; // 17 looks perfect for me. the pixels i mean, i am not drake
             ssfn_dst.x = 1;
             s++;
             continue;
