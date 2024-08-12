@@ -81,6 +81,6 @@ void init_acpi() {
     outb(fadt->SMI_commandPort, fadt->acpiEnable);
     pit_sleep(3000); // wait 3s for the hardware to change modes.
 
-    // poll pm1a control block until bit 0 is set. when complete power management is enabled.
+    // poll pm1a control block until bit 0 is set. when completed, power management is enabled.
     while ((inw(fadt->PM1aControlBlock) & 1) == 0);
 }
