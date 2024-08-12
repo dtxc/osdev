@@ -28,7 +28,9 @@ static void ssfn_puts(char *s) {
     }
 }
 
-void kernel_main(struct vbe_mode_info *vbe_info) {
+void kernel_main() {
+    ssfn_puts("hello world");
+    
     return;
 }
 
@@ -63,7 +65,7 @@ void kernel_init(struct mboot_info *mboot_ptr) {
     asm volatile("sti");
 
     init_acpi();
-    ssfn_puts("ACPI initialization completed.");
+    // ssfn_puts("ACPI initialization completed.\n");
 
     kernel_main(vbe_info);
 }
