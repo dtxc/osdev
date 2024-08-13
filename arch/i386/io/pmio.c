@@ -19,3 +19,15 @@ uint16_t inw(uint16_t port) {
     asm volatile("inw %1, %0" : "=a" (ret) : "dN" (port));
     return ret;
 }
+
+uint32_t inl(uint16_t port) {
+    uint32_t ret;
+    asm volatile("inl %1, %0" : "=a" (ret) : "dN" (port));
+    return ret;
+}
+
+void insl(uint16_t port, uint32_t *buffer, int quads) {
+    for (int i = 0; i < quads; i++) {
+        buffer[i] = inl(port);
+    }
+}
