@@ -13,7 +13,8 @@ This is a 32 bit hobby operating system written from scratch. Development starte
 + ACPI implementation ✅
 + VESA mode (using LFB provided by grub) ✅
 + Custom font support (using [ssfn.h](https://gitlab.com/bztsrc/scalable-font2/-/blob/master/ssfn.h?ref_type=heads)) ✅
-+ IDE controller ❌
++ PIO ATA driver for sector r/w (temporary) ✅
++ SATA driver via DMA ❌
 + Custom filesystem (currently wip) ❌
 + Network stack ❌
 + Keyboard and mouse drivers ❌
