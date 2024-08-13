@@ -13,8 +13,7 @@
 + ACPI table parsing ✅
 + VESA mode (using LFB provided by grub) ✅
 + Custom font support (using [ssfn.h](https://gitlab.com/bztsrc/scalable-font2/-/blob/master/ssfn.h?ref_type=heads)) ✅
-+ PIO ATA driver for sector r/w (temporary) ✅
-+ ATA driver via DMA ❌
++ ATA driver via DMA (currently wip) ❌
 + Custom filesystem (currently wip) ❌
 + HPET ❌
 + Keyboard and mouse drivers ❌
