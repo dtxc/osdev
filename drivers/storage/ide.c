@@ -9,11 +9,17 @@ static void ata_select_device(uint8_t drive, uint32_t lba) {
     outb(ATA_PRIMARY_IO_BASE + 5, (uint8_t) ((lba >> 16) & 0xFF));
 }
 
+// TODO: error checking
+static void ata_polling() {
+    // wait for BSY to be 0
+    while (inb(ATA_PRIMARY_IO_BASE + 7) & 0x80); // 0x80: busy
+}
+
 int ata_read_sector(uint8_t drive, uint32_t lba, uint8_t *buffer) {
-    while (inb(ATA_PRIMARY_IO_BASE + 7) & 0x80);
+    ata_polling();
     ata_select_device(drive, lba);
     outb(ATA_PRIMARY_IO_BASE + 7, ATA_CMD_READ);
-    while (inb(ATA_PRIMARY_IO_BASE + 7) & 0x80);
+    ata_polling();
 
     for (int i = 0; i < ATA_SECTOR_SIZE / 2; i++) {
         uint16_t data = inw(ATA_PRIMARY_IO_BASE);
@@ -25,10 +31,10 @@ int ata_read_sector(uint8_t drive, uint32_t lba, uint8_t *buffer) {
 }
 
 int ata_write_sector(uint8_t drive, uint32_t lba, const uint8_t *buffer) {
-    while (inb(ATA_PRIMARY_IO_BASE + 7) & 0x80);
+    ata_polling();
     ata_select_device(drive, lba);
     outb(ATA_PRIMARY_IO_BASE + 7, ATA_CMD_WRITE);
-    while (inb(ATA_PRIMARY_IO_BASE + 7) & 0x80);
+    ata_polling();
 
     for (int i = 0; i < ATA_SECTOR_SIZE / 2; i++) {
         uint16_t data = ((uint16_t) buffer[i * 2 + 1] << 8) | buffer[i * 2];
