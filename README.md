@@ -16,10 +16,11 @@ This is a 32 bit hobby operating system written from scratch. Development starte
 + PIO ATA driver for sector r/w (temporary) ✅
 + SATA driver via DMA ❌
 + Custom filesystem (currently wip) ❌
-+ Network stack ❌
++ HPET ❌
 + Keyboard and mouse drivers ❌
 + Usermode and system calls ❌
 + Multitasking and ELF loader ❌
++ Network stack ❌
 + GUI and userspace utility programs ❌
 
 <br>
