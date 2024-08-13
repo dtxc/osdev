@@ -2,6 +2,7 @@
 #include <ssfn.h>
 #include <multiboot.h>
 
+#include <hw/ata.h>
 #include <asm/io.h>
 #include <int/idt.h>
 #include <int/gdt.h>
@@ -43,6 +44,8 @@ void kernel_main() {
     return;
 }
 
+extern struct FADT *fadt;
+
 void kernel_init(struct mboot_info *mboot_ptr) {
     init_serial();
     serial_puts("Serial output successfully initialized.\n");
@@ -79,8 +82,11 @@ void kernel_init(struct mboot_info *mboot_ptr) {
 
     init_acpi();
     ssfn_putc('[');
-    ssfn_cputs("+", 0xFF00FF00); // green
+    ssfn_cputs("+", 0xFF00FF00);
     ssfn_puts("] ACPI initialization completed.\n");
+
+    // initializing IDE with these parameters supports only parallel IDE
+    init_ide(0x1F0, 0x3F6, 0x170, 0x376, 0x000);
 
     kernel_main();
 }
