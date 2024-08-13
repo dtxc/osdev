@@ -3,7 +3,7 @@
 
 <br>
 
-## Features
+## Features & TODOs
 + GDT/IDT ✅
 + TSS ✅
 + PIT timer ✅
@@ -13,14 +13,17 @@
 + ACPI table parsing ✅
 + VESA mode (using LFB provided by grub) ✅
 + Custom font support (using [ssfn.h](https://gitlab.com/bztsrc/scalable-font2/-/blob/master/ssfn.h?ref_type=heads)) ✅
-+ ATA driver via DMA (currently wip) ❌
-+ Custom filesystem (currently wip) ❌
-+ HPET ❌
++ Simple ATA driver with sector I/O ✅
++ Custom block based filesystem (wip) ❌
++ /dev/stdout implementation* ❌
++ VESA text mode scrolling ❌
 + Keyboard and mouse drivers ❌
 + Usermode and system calls ❌
 + Multitasking and ELF loader ❌
 + Network stack ❌
 + GUI and userspace utility programs ❌
+
+<sub>*implementing a /dev/stdout will eliminate the need for individual printf's for each display mode</sub>
 
 <br>
 
