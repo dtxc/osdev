@@ -23,13 +23,13 @@
 + Network stack ❌
 + GUI and userspace utility programs ❌
 
-<sub>*implementing a /dev/stdout will eliminate the need for individual printf's for each display mode</sub>
+<sub>*implementing a /dev/stdout will eliminate the need for individual printf's for each display mode. I know this can be achieved without /dev/stdout but this implementation will be useful for later.</sub>
 
 <br>
 
 ## Notes
 + The LFB is originally placed at `0xFD000000` and is mapped at VA = `0xD0000000`, mapping it with PA = VA causes issues which I may resolve in the future.
-+ The PIT timer is very inaccurate, an IRQ is fired every 0.999847 ms, resulting in a 153 ns error every second. (i.e. calling `pit_sleep(10000)` will finish 1530 ns earlier)
++ The PIT timer is inaccurate, an IRQ is fired every 0.999847 ms, resulting in a 153 ns error every second. (i.e. calling `pit_sleep(10000)` will finish 1530 ns earlier)
 + The ATA driver is currently implemented using programmed I/O which is significantly slower than direct memory access (DMA).
 
 <br>
