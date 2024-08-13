@@ -85,8 +85,5 @@ void kernel_init(struct mboot_info *mboot_ptr) {
     ssfn_cputs("+", 0xFF00FF00);
     ssfn_puts("] ACPI initialization completed.\n");
 
-    // initializing IDE with these parameters supports only parallel IDE
-    init_ide(0x1F0, 0x3F6, 0x170, 0x376, 0x000);
-
     kernel_main();
 }
