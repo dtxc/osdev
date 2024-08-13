@@ -1,5 +1,5 @@
 # osdev
-This is a 32 bit hobby operating system written from scratch. Development started at approximately August 2022, halted 3 months later and continued at June 2024.
+"It works on my machine"
 
 <br>
 
