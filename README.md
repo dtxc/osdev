@@ -14,7 +14,7 @@
 + VESA mode (using LFB provided by grub) ✅
 + Custom font support (using [ssfn.h](https://gitlab.com/bztsrc/scalable-font2/-/blob/master/ssfn.h?ref_type=heads)) ✅
 + Simple ATA driver with sector I/O ✅
-+ Custom block based filesystem (wip) ❌
++ Custom block based [filesystem](https://github.com/dtxc/simple-fs) (wip) ❌
 + /dev/stdout implementation* ❌
 + VESA text mode scrolling ❌
 + Keyboard and mouse drivers ❌
