@@ -110,7 +110,4 @@ struct RSDT {
     uint32_t pointerToOtherSDT[]; // size: (h.length - sizeof(h)) / 4
 } __attribute__((packed));
 
-
-struct RSDP *find_rsdp();
-struct FADT *find_fadt(struct RSDT *rsdt);
 void init_acpi();
