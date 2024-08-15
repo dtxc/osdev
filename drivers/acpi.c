@@ -7,7 +7,7 @@
 
 struct FADT *fadt;
 
-struct RSDP *find_rsdp() {
+static struct RSDP *find_rsdp() {
     uint8_t *ebda = (uint8_t *) 0x40E; // extended BIOS data area
 
     // the signature is within a 16 byte boundary
@@ -29,7 +29,7 @@ struct RSDP *find_rsdp() {
     return NULL;
 }
 
-struct FADT *find_fadt(struct RSDT *rsdt) {
+static struct FADT *find_fadt(struct RSDT *rsdt) {
     int entries = (rsdt->header.len - sizeof(rsdt->header)) / 4;
 
     for (int i = 0; i < entries; i++) {
