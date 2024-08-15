@@ -34,4 +34,4 @@
 <br>
 
 ## Third party software
-While this operating system uses its own native tools, it also uses [Scalable Screen Font 2.0](https://gitlab.com/bztsrc/scalable-font2/-/tree/master?ref_type=heads) for font rendering.
+While this operating system uses its own native tools, in also relies on [Scalable Screen Font 2.0](https://gitlab.com/bztsrc/scalable-font2/-/tree/master?ref_type=heads) for font rendering.
