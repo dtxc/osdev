@@ -1,5 +1,5 @@
 # osdev
-"It works on my machine"
+"It works on my machine" <sub><sub>(No actually, everything I upload here has been tested on my vm and it works, so i wont be reading yalls issues unless its a feature request)</sub></sub>
 
 <br>
 
