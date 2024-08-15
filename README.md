@@ -5,22 +5,21 @@
 
 ## Features & TODOs
 + GDT/IDT ✅
-+ TSS ✅
 + PIT timer ✅
-+ Serial debugging ✅
 + Paging ✅
 + Kernel heap memory allocator ✅
 + ACPI table parsing ✅
 + VESA mode (using LFB provided by grub) ✅
-+ Custom font support (using [ssfn.h](https://gitlab.com/bztsrc/scalable-font2/-/blob/master/ssfn.h?ref_type=heads)) ✅
++ Text rendering with custom font support (using [ssfn.h](https://gitlab.com/bztsrc/scalable-font2/-/blob/master/ssfn.h?ref_type=heads)) ✅
 + Simple ATA driver with sector I/O ✅
 + Custom block based [filesystem](https://github.com/dtxc/simple-fs) (wip) ❌
 + /dev/stdout implementation* ❌
 + VESA text mode scrolling ❌
++ ACPI power management (which is currently enabled) ❌
 + Keyboard and mouse drivers ❌
 + Usermode and system calls ❌
++ Userspace memory allocator ❌
 + Multitasking and ELF loader ❌
-+ Network stack ❌
 + GUI and userspace utility programs ❌
 
 <sub>*implementing a /dev/stdout will eliminate the need for individual printf's for each display mode. I know this can be achieved without /dev/stdout but this implementation will be useful for later.</sub>
