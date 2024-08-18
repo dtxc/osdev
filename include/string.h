@@ -4,6 +4,7 @@
 
 void memset(void *dst, uint8_t c, int n);
 void memcpy(void *dst, void *src, int num);
+void memmove(void *dst, void *src, uint32_t n);
 
 int strcpy(char *dst, const char *src);
 int strncpy(char *dst, const char *src, int n);
