@@ -1,3 +1,5 @@
+// TODO: implement assert function
+
 #include <string.h>
 #include <hw/ata.h>
 #include <asm/io.h>
@@ -19,7 +21,6 @@ static uint32_t find_next_free_block(block_t *dest, uint32_t iblk) {
     uint32_t fs_size = 1048576;
 
     block_t *blk = (block_t *) kmalloc(BLOCK_SIZE);
-    // fseek(fp, offset, SEEK_SET);
 
     while (offset < fs_size) {
         memset(blk, 0, BLOCK_SIZE);
