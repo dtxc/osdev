@@ -13,3 +13,4 @@ int strlen(const char *s);
 
 int itoa(char *dst, int n);
 int int2hex(char *dst, uint32_t n);
+int split_string(char *str, char delimiter, char ***tokens);
