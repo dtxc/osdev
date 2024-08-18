@@ -88,3 +88,5 @@ node_t *mknode(char *path, int type);
 file_t *fopen(char *path, uint8_t mode);
 int fread(file_t *file, uint32_t size, uint8_t *buffer);
 int fwrite(file_t *file, uint32_t size, uint8_t *buffer);
+
+void init_fs();
