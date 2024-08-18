@@ -85,6 +85,6 @@ typedef struct {
 } file_t;
 
 node_t *mknode(char *path, int type);
-file_t *_fopen(char *path, uint8_t mode);
-int _fread(file_t *fp, uint32_t size, uint8_t *buffer);
-int _fwrite(file_t *fp, uint32_t size, uint8_t *buffer);
+file_t *fopen(char *path, uint8_t mode);
+int fread(file_t *file, uint32_t size, uint8_t *buffer);
+int fwrite(file_t *file, uint32_t size, uint8_t *buffer);
