@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <video/vbe.h>
 #include <video/vga.h>
 
-void vprintf(const char *s, va_list list) {
+static void vfprintf(file_t *fp, const char *s, va_list list) {
     int i = 0;
 
     while (1) {
@@ -24,36 +24,99 @@ void vprintf(const char *s, va_list list) {
                 int arg = va_arg(list, int);
                 char ptr[10];
                 itoa(ptr, arg);
-                puts(ptr);
+                if (fp == stdout) {
+                    #ifndef VESA_MODE
+                    puts(ptr);
+                    #else
+                    vesa_puts(ptr);
+                    #endif
+                } else {
+                    fwrite(fp, 10, (uint8_t *) ptr);
+                }
             } else if (next == 'u') {
                 uint32_t arg = va_arg(list, uint32_t);
                 char ptr[9];
                 itoa(ptr, arg);
-                puts(ptr);
+                if (fp == stdout) {
+                    #ifndef VESA_MODE
+                    puts(ptr);
+                    #else
+                    vesa_puts(ptr);
+                    #endif
+                } else {
+                    fwrite(fp, 9, (uint8_t *) ptr);
+                }
             } else if (next == 'x') {
                 uint32_t arg = va_arg(list, uint32_t);
                 char ptr[9];
                 int2hex(ptr, arg);
-                puts(ptr);
+                if (fp == stdout) {
+                    #ifndef VESA_MODE
+                    puts(ptr);
+                    #else
+                    vesa_puts(ptr);
+                    #endif
+                } else {
+                    fwrite(fp, 9, (uint8_t *) ptr);
+                }
             } else if (next == 'c') {
                 char arg = va_arg(list, int);
-                putc(arg);
+                if (fp == stdout) {
+                    #ifndef VESA_MODE
+                    putc(ptr);
+                    #else
+                    vesa_putc(arg);
+                    #endif
+                } else {
+                    fwrite(fp, 1, (uint8_t *) &arg);
+                }
             } else if (next == 's') {
-                char *arg = va_arg(list, char*);
-                puts(arg);
+                char *ptr = va_arg(list, char*);
+                if (fp == stdout) {
+                    #ifndef VESA_MODE
+                    puts(ptr);
+                    #else
+                    vesa_puts(ptr);
+                    #endif
+                } else {
+                    fwrite(fp, strlen(ptr), (uint8_t *) ptr);
+                }
             } else if (next == '%') {
-                putc('%');
+                if (fp == stdout) {
+                    #ifndef VESA_MODE
+                    putc('%');
+                    #else
+                    vesa_putc('%');
+                    #endif
+                } else {
+                    fwrite(fp, 1, (uint8_t *) "%");
+                }
             }
         } else {
-            putc(c);
+            if (fp == stdout) {
+                #ifndef VESA_MODE
+                putc(c);
+                #else
+                vesa_putc(c);
+                #endif
+            } else {
+                fwrite(fp, 1, (uint8_t *) &c);
+            }
         }
         i++;
     }
 }
 
-void printf(const char *s, ...) {
+void fprintf(file_t *fp, const char *s, ...) {
     va_list arg;
     va_start(arg, s);
-    vprintf(s, arg);
+    vfprintf(fp, s, arg);
+    va_end(arg);
+}
+
+void printf(const char *fmt, ...) {
+    va_list arg;
+    va_start(arg, fmt);
+    vfprintf(stdout, fmt, arg);
     va_end(arg);
 }
