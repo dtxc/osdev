@@ -22,6 +22,23 @@ void memcpy(void *dst, void *src, int num) {
     }
 }
 
+void memmove(void *dst, void *src, uint32_t n) {
+    uint8_t *d = (uint8_t *) dst;
+    uint8_t *s = (uint8_t *) src;
+
+    if (d > s && d < s + n) {
+        d += n;
+        s += n;
+        while (n--) {
+            *(--d) = *(--s);
+        }
+    } else {
+        while (n--) {
+            *d++ = *s++;
+        }
+    }
+}
+
 int strcpy(char *dst, const char *src) {
     int i = 0;
     while (src[i] != '\0') {
