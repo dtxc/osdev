@@ -12,7 +12,7 @@
 + VESA mode (using LFB provided by grub) ✅
 + Text rendering with custom font support (using [ssfn.h](https://gitlab.com/bztsrc/scalable-font2/-/blob/master/ssfn.h?ref_type=heads)) ✅
 + Simple ATA driver with sector I/O ✅
-+ Custom block based [filesystem](https://github.com/dtxc/skbd-fs) (wip) ❌
++ Low level implementation of [skbd-fs](https://github.com/dtxc/skbd-fs) (wip) ❌
 + /dev/stdout implementation* ❌
 + VESA text mode scrolling ❌
 + ACPI power management (which is currently enabled) ❌
