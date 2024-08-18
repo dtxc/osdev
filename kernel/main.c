@@ -1,6 +1,9 @@
 #define SSFN_CONSOLEBITMAP_TRUECOLOR
 #include <ssfn.h>
+#include <stdio.h>
 #include <multiboot.h>
+
+#include <fs/skbdfs.h>
 
 #include <hw/ata.h>
 #include <asm/io.h>
@@ -15,31 +18,16 @@
 
 extern uint8_t _binary_console_sfn_start;
 
-static void ssfn_puts(char *s) {
-    while (*s != '\0') {
-        // when *s = '\n', ssfn_putc prints a weird unicode instead of a newline.
-        if (*s == '\n') {
-            ssfn_dst.y += 17; // 17 looks perfect for me. the pixels i mean, i am not drake
-            ssfn_dst.x = 1;
-            s++;
-            continue;
-        }
-
-        ssfn_putc(*s);
-        s++;
-    }
-}
-
 static void ssfn_cputs(char *s, uint32_t fg) {
     ssfn_dst.fg = fg;
-    ssfn_puts(s);
+    vesa_puts(s);
     ssfn_dst.fg = 0xFFFFFFFF;
 }
 
 void kernel_main() {
-    ssfn_puts("\n\nWelcome to ");
+    vesa_puts("\nWelcome to ");
     ssfn_cputs("Radiant OS", 0xFF00FFFF);
-    ssfn_puts("!\n"); // just a minor detail cuz im a lil crazy for them.
+    vesa_puts("!\n"); // just a minor detail cuz im a lil crazy for them.
 
     return;
 }
@@ -65,7 +53,7 @@ void kernel_init(struct mboot_info *mboot_ptr) {
     vbe_info = (struct vbe_mode_info*) mboot_ptr->vbe_mode_info;
     init_vbe(vbe_info);
 
-    ssfn_src = &_binary_console_sfn_start;
+    ssfn_src = (ssfn_font_t *) &_binary_console_sfn_start;
     ssfn_dst.ptr = (uint8_t*) LFB_VADDR;
     ssfn_dst.p = vbe_info->pitch; // bytes per line
     ssfn_dst.fg = 0xFFFFFFFF; // white on black
@@ -75,7 +63,7 @@ void kernel_init(struct mboot_info *mboot_ptr) {
 
     ssfn_putc('[');
     ssfn_cputs("+", 0xFF00FF00); // green
-    ssfn_puts("] SSFN has been configured.\n");
+    vesa_puts("] SSFN has been configured.\n");
 
     // enable interrupts
     asm volatile("sti");
@@ -83,7 +71,12 @@ void kernel_init(struct mboot_info *mboot_ptr) {
     init_acpi();
     ssfn_putc('[');
     ssfn_cputs("+", 0xFF00FF00);
-    ssfn_puts("] ACPI initialization completed.\n");
+    vesa_puts("] ACPI initialization completed.\n");
+
+    uint32_t size = get_drive_size(0);
+
+    init_fs();
+    printf("Device detected: id: 0, size: %u MiB\n", size / 1024);
 
     kernel_main();
 }
