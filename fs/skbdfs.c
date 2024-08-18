@@ -435,3 +435,7 @@ int fwrite(file_t *file, uint32_t size, uint8_t *buffer) {
     file->is_locked = 0;
     return 0;
 }
+
+void init_fs() {
+    stdout = fopen("/dev/stdout", FMODE_W);
+}
