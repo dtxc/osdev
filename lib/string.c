@@ -1,6 +1,6 @@
 #include <string.h>
 
-void *memset(void *dst, uint8_t c, int n) {
+void memset(void *dst, uint8_t c, int n) {
     int i, m;
     unsigned long *wdst = dst;
     long c1 = c + (c << 8) + (c << 16) + (c << 24);
@@ -12,23 +12,33 @@ void *memset(void *dst, uint8_t c, int n) {
     for (i = 0, m = n % sizeof(long); i < m; i++) {
         *(((uint8_t *) wdst) + i) = c;
     }
+}
 
-    return dst;
+void memcpy(void *dst, void *src, int num) {
+    for (int i = 0; i < num; i++) {
+        *((uint8_t *) (dst + i)) = *((uint8_t *) (src + i));
+    }
 }
 
 int strcpy(char *dst, const char *src) {
     int i = 0;
-    while (1) {
-        char c = *src;
-        *dst = c;
-
-        if (c == '\0') {
-            break;
-        }
-
+    while (src[i] != '\0') {
+        dst[i] = src[i];
         i++;
-        dst++;
-        src++;
+    }
+    dst[i] = '\0'; // set null terminator
+
+    return i;
+}
+
+int strncpy(char *dst, const char *src, int n) {
+    if (strlen(src) < n) {
+        n = strlen(src);
+    }
+
+    int i;
+    for (i = 0; i < n; i++) {
+        dst[i] = src[i];
     }
 
     return i;
@@ -106,7 +116,7 @@ int int2hex(char *dst, uint32_t n) {
         dst[1] = '\0';
         return 0;
     }
-    
+
     if (n < 0) {
         dst[start++] = '-';
         n = -n;
