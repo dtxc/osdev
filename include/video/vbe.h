@@ -4,7 +4,10 @@
 
 #define LFB_PHYS_ADDR   0xFD000000
 #define LFB_VADDR       0xD0000000 
-#define LFB_SIZE        0x00200000 // 2 mib, enough for 600x800x32
+#define LFB_SIZE        0x00200000 // 2 mib, enough for 800x600x32
+
+#define SCREEN_WIDTH    800
+#define SCREEN_HEIGHT   600
 
 struct vbe_mode_info {
     uint16_t attributes;
@@ -47,3 +50,5 @@ struct vbe_mode_info {
 
 void init_vbe(struct vbe_mode_info *vbe_info);
 void putpixel(int x, int y, uint32_t color);
+void vesa_puts(char *s);
+void vesa_putc(char c);
