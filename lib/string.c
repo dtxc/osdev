@@ -1,4 +1,6 @@
 #include <string.h>
+#include <asm/io.h>
+#include <mm/kheap.h>
 
 void memset(void *dst, uint8_t c, int n) {
     int i, m;
@@ -138,4 +140,42 @@ int int2hex(char *dst, uint32_t n) {
 
     strcpy(dst + start, buff + i + 1);
     return start + 14 + i;
+}
+
+int split_string(char *str, char delimiter, char ***tokens) {
+    int token_count = 0;
+    int str_len = strlen(str);
+    int i, j, start;
+
+    // count the number of tokens
+    for (i = 0; i < str_len; i++) {
+        if (str[i] == delimiter) {
+            token_count++;
+        }
+    }
+    token_count++;
+
+    *tokens = (char **) kmalloc(token_count * sizeof(char*));
+    if (*tokens == NULL) {
+        return -1;
+    }
+
+    // extract the tokens
+    start = 0;
+    j = 0;
+    for (i = 0; i <= str_len; i++) {
+        if (str[i] == delimiter || str[i] == '\0') {
+            int token_len = i - start;
+            (*tokens)[j] = (char *) kmalloc((token_len + 1) * sizeof(char));
+            if ((*tokens)[j] == NULL) {
+                return -1;
+            }
+            strncpy((*tokens)[j], &str[start], token_len);
+            (*tokens)[j][token_len] = '\0';
+            j++;
+            start = i + 1;
+        }
+    }
+
+    return token_count;
 }
