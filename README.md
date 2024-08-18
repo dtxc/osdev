@@ -13,14 +13,11 @@
 + Text rendering with custom font support (using [ssfn.h](https://gitlab.com/bztsrc/scalable-font2/-/blob/master/ssfn.h?ref_type=heads)) ✅
 + Simple ATA driver with sector I/O ✅
 + Custom block based filesystem ([skbd-fs](https://github.com/dtxc/skbd-fs)) ✅
-+ ACPI power management (which is currently enabled) ❌
 + Keyboard and mouse drivers ❌
 + Usermode and system calls ❌
 + Userspace memory allocator ❌
 + Multitasking and ELF loader ❌
 + GUI and userspace utility programs ❌
-
-<sub>*implementing a /dev/stdout will eliminate the need for individual printf's for each display mode. I know this can be achieved without /dev/stdout but this implementation will be useful for later.</sub>
 
 <br>
 
