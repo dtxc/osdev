@@ -54,5 +54,16 @@ void _start() {
 
 <br>
 
+## Known bugs
+Since time is very limited right now, if a bug doesn't block progress it will be placed here and fixed later.
+
++ Using global variables inside a user program causes a page fault
++ Context switching after sleep() of a task expires causes undefined behavior
++ Indexing by pid in the tcb array causes undefined behavior (already fixed, will commit soon)
++ tty binary
++ Adding large files in the rootfs corrupts the image
+
+<br>
+
 ## Third party software
 While this operating system uses its own native tools, in also relies on [Scalable Screen Font 2.0](https://gitlab.com/bztsrc/scalable-font2/-/tree/master?ref_type=heads) for font rendering.
