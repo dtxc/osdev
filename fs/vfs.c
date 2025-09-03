@@ -110,25 +110,26 @@ int vfs_write(struct file *file, uint32_t size, uint8_t *buffer) {
         return fwrite(file, size, buffer);
     } else if (file->type == FILE_DEVICE) {
         if (file->device->write == NULL) {
-            return -1; // Operation not permitted
+            return -EPERM; // Operation not permitted
         }
 
         return file->device->write(file, size, buffer);
     }
 
-    return -2; // Invalid data
-}
+    return -EINVAL; // Invalid data
+}/
 
 int vfs_read(struct file *file, uint32_t size, uint8_t *buffer) {
     if (file->type == FILE_NORMAL) {
         return fread(file, size, buffer);
     } else if (file->type == FILE_DEVICE) {
         if (file->device->read == NULL) {
-            return -1;
+            return -EPERM;
         }
         
         return file->device->read(file, size, buffer);
     }
 
-    return -2;
+    return -EINVAL;
+
 }
